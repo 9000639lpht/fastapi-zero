@@ -67,3 +67,55 @@ Para que possamos garantir estes esquema este contrato sobre a troca de informac
 
 Tecnicamente dentro do universo de APIs e contratos de dados, especialmente ao trabalhar com Python
 o Pydantic se destaca como uma ferramenta poderosa e versatil. Alem de embutida ja no FastAPI, a ideia dele e criar uma camada de documentacao, via OpenAPI, e de fazer a validacao dos modelos de entrada e saida da nossa API.
+
+---
+
+### Um tipo de recurso
+Quando queremos manibula um tipo especifico de dados, precisamos fazer algumas operacoes com ele.
+
+Por exemplo, vamos pensar na manipulacao de `users`:
+
+- Registrar
+- Deletar
+- Editar
+- ...
+
+
+### Operacoes com dados
+Quando estamos trabalhando ou realizamos operacoes com dados e muito comum que o nosso sistema esteja se comunicando na arquitetura cliente servidor. E para fazer com que tudo isso funcione e o cliente e o servidor precisam conversar e para o cliente converser ou melhor trocar informacoes e criado o famoso CRUD que e o acronimo para:
+
+- C = Create: (Create criar, tem o papel de adicionar novos registros)
+- R = Read (Recuperar registros existentes)
+- U = Update (Modificar registros existentes)
+- D = Delete (Remover registros existentes)
+
+Logo, o nosso recurso unico que no caso e o user ele e capaz de realizar todas essas operacoes na nossa API, temos que ser capazes de realizar cada uma dessas operacoes ler, criar, atualizar e deletar.
+
+### A estrutura dos dados
+Bom, como para se comunicar dentro da arquitetura cliente servidor isso ocorre atraves da troca de mensagens, troca essa que e feita atraves do protocolo HTTP e precisamos definir um formato para transferir esse dado como ja vimos em outros momentos do estudo do FastAPI, os dados sao trafegados atraves do padrao JSON, por se leve e agnostico. Veja entao o que teremos e um JSON com o seguinte formato:
+
+```json
+    {
+        "username": "jvmedeirosr",
+        "email": "jvmedeirosr@gmail.com",
+        "password": "senha_do_joao"
+    }
+```
+Sendo assim, esses dados JSON que ta partindo do cliente e sera enviado para o servidor e chamado de payload ou seja e como se fosse uma carga que esta sendo enviada para o servidor atraves de uma requisicao do client
+
+### Pydantic
+Pra gente traduzir esse payload, temos os **schemas** e como a API deve dizer para a aplicacao os dados que eu recebo esta nessa documentacao do Pydantic.
+
+Portanto, o Pydantic aqui atua para ser aquele cara pedante e resolver o "contrato" existente entre o cliente e servidor. Logo podemos converter esse formato de dados JSON esse payload em uma classe ou um modelo(schema) ou tambem chamado de DETEOR.
+
+Entao magina que eu tenho o meu JSON contendo os campos `username`, `email` e `password` mostrados anteriormente eu posso utilizar o Pydantic para garantir que os dados sera todos do tipo string e que o contrato sera seguido/respeitado. e com o uso do Pydantic teremos algo da seguinte maneira:
+
+```python
+from pydantic import BaseModel
+
+
+class UserSchema(BaseModel):
+    username: str
+    email: str
+    password: str
+```

@@ -1,7 +1,9 @@
 from http import HTTPStatus
+
 from fastapi.testclient import TestClient
 
 from fastzero.lecture import app
+
 
 def test_lecture():
     test_client = TestClient(app)
