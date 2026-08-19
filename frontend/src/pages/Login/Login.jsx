@@ -1,12 +1,12 @@
 import "./Login.css";
-import logo from "../../assets/logo.png";
-import cornImage from "../../assets/corn.png";
+import logo from "../../assets/images/logo.jpg";
+import cornImage from "../../assets/images/corn.jpg";
 
 function Login() {
     return (
         <div className="login-container">
             <div className="login-left">
-                <div className="login-container">
+                <div className="logo-container">
                     {logo}
                 </div>
 
@@ -22,7 +22,7 @@ function Login() {
                         </div>
                         <div className="password-header">
                             <label htmlFor="password">Senha</label>
-                            /* <a href="#">Esqueceu sua senha?</a> */
+                            <a href="#">Esqueceu sua senha?</a>
                         </div>
                         <div className="form-group">
                             <input type="password" id="password" placeholder="Digite sua senha" />
