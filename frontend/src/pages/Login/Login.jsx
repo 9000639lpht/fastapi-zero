@@ -7,7 +7,7 @@ function Login() {
         <div className="login-container">
             <div className="login-left">
                 <div className="logo-container">
-                    {logo}
+                    <img src={logo} alt="Imagem de milho" />
                 </div>
 
                 <div className="login-card">
